@@ -5,6 +5,11 @@ pool:
   azure_local_pool
   #vmImage: ubuntu-latest
   #MylocalPool
+  
+variables:
+  LT_USERNAME: 'vaneetb'
+  LT_ACCESS_KEY: '8iwAZa7mEGu7pc41aIkNJpnvHFc5lcIgy1cF4joZatI0lWvP1u'
+  LT_BUILD_NAME: 'Azure_testng_demo'
 
 stages:
 - stage: BuildAndTest
