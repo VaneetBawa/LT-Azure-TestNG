@@ -21,8 +21,8 @@ public class TestNGTodo1 {
 
     @BeforeMethod
     public void setup(Method m, ITestContext ctx) throws MalformedURLException {
-        String username ="vaneetb";
-        String authkey = "8iwAZa7mEGu7pc41aIkNJpnvHFc5lcIgy1cF4joZatI0lWvP1u";
+        String username ="";
+        String authkey = "";
         String hub = "@hub.lambdatest.com/wd/hub";
         String file=System.getenv("LT_BUILD_NAME");
         DesiredCapabilities caps = new DesiredCapabilities();
