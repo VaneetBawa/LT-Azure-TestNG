@@ -7,8 +7,8 @@ pool:
   #MylocalPool
   
 variables:
-  LT_USERNAME: ''
-  LT_ACCESS_KEY: ''
+  LT_USERNAME: 'vaneetb'
+  LT_ACCESS_KEY: 'PQ2AhuxqqOWAfvzfJlvPaOqusS7YKqfwFJR6DoWY2vsA8CvTzC'
   LT_BUILD_NAME: 'Azure_testng_demo'
 
 stages:
