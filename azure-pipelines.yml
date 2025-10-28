@@ -6,9 +6,8 @@ pool:
   #vmImage: ubuntu-latest
 
 variables:
-  LT_USERNAME: vaneetb
-  LT_ACCESS_KEY: PQ2AhuxqqOWAfvzfJlvPaOqusS7YKqfwFJR6DoWY2vsA8CvTzC
-  LT_BUILD_NAME: Azure_testng_demo
+  LT_USERNAME: "$(USERNAME)"
+  LT_ACCESS_KEY: "$(ACCESS)"
 
 stages:
 - stage: BuildAndTest
@@ -22,20 +21,17 @@ stages:
       - script: mvn clean install -DskipTests
         displayName: "Build"
         env:
-          LT_USERNAME: $(LT_USERNAME)
-          LT_ACCESS_KEY: $(LT_ACCESS_KEY)
-          LT_BUILD_NAME: $(LT_BUILD_NAME)
+          LT_USERNAME: $(USERNAME)
+          LT_ACCESS_KEY: $(ACCESS)
 
       - script: mvn test -D suite=single.xml
         displayName: "Run tests"
         env:
-          LT_USERNAME: $(LT_USERNAME)
-          LT_ACCESS_KEY: $(LT_ACCESS_KEY)
-          LT_BUILD_NAME: $(LT_BUILD_NAME)
+          LT_USERNAME: $(USERNAME)
+          LT_ACCESS_KEY: $(ACCESS)
 
       - task: LambdatestResults@1
         displayName: "LambdaTest Results"
         env:
-          LT_USERNAME: $(LT_USERNAME)
-          LT_ACCESS_KEY: $(LT_ACCESS_KEY)
-          LT_BUILD_NAME: $(LT_BUILD_NAME)
+          LT_USERNAME: $(USERNAME)
+          LT_ACCESS_KEY: $(ACCESS)
