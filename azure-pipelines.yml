@@ -2,7 +2,9 @@ trigger:
 - main
 
 pool:
-  vmImage: ubuntu-latest
+  Default
+  #vmImage: ubuntu-latest
+  #MylocalPool
 
 variables:
   LT_BUILD_NAME: 'Azure_testng_demo'
