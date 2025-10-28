@@ -7,9 +7,7 @@ pool:
   #MylocalPool
   
 variables:
-  LT_USERNAME: 'vaneetb'     # Replace with your LambdaTest username
-  LT_ACCESS_KEY: 'PQ2AhuxqqOWAfvzfJlvPaOqusS7YKqfwFJR6DoWY2vsA8CvTzC'     # Replace with your LambdaTest access key
-  LT_BUILD_NAME: 'Azure_testng_demo'
+- group: LambdaTestCredentials
 
 stages:
 - stage: BuildAndTest
