@@ -2,10 +2,8 @@ trigger:
 - main
 
 pool:
-  Default
-  #vmImage: ubuntu-latest
-  #MylocalPool
-  
+  vmImage: ubuntu-latest
+
 variables:
   LT_BUILD_NAME: 'Azure_testng_demo'
 
@@ -13,30 +11,32 @@ stages:
 - stage: BuildAndTest
   jobs:
   - job: BuildAndTestJob
+    displayName: "Run Tests on LambdaTest"
+
     steps:
       - task: configuration@1
+        displayName: "Setup LambdaTest Configuration"
         inputs:
-            connection: vaneet-test
-            #isTunnelActivate: true
-            #tunnelOptions: '{"tunnelName": "ABC"}'
+          connection: vaneet-test
+        env:
+          LT_USERNAME: $(LT_USERNAME)
+          LT_ACCESS_KEY: $(LT_ACCESS_KEY)
+
       - script: |
           mvn clean install -DskipTests
-      - script: "mvn test -D suite=single.xml"
-        displayName: "Command Line Script"
+        displayName: "Build Project"
+
+      - script: |
+          mvn test -D suite=single.xml
+        displayName: "Run TestNG Tests"
         env:
           LT_USERNAME: $(LT_USERNAME)
           LT_ACCESS_KEY: $(LT_ACCESS_KEY)
           LT_BUILD_NAME: $(LT_BUILD_NAME)
+
       - task: LambdatestResults@1
-        displayName: "LambdaTest Results"
+        displayName: "Publish LambdaTest Results"
         env:
           LT_USERNAME: $(LT_USERNAME)
           LT_ACCESS_KEY: $(LT_ACCESS_KEY)
           LT_BUILD_NAME: $(LT_BUILD_NAME)
-        
-# - stage: LambdatestResults
-#   jobs:
-#   - job: LambdatestResultsJob
-#     steps:
-#       - script: |
-#           echo "Hello"
