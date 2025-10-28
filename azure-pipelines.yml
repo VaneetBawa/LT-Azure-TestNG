@@ -4,42 +4,38 @@ trigger:
 pool:
   Default
   #vmImage: ubuntu-latest
-  #MylocalPool
 
 variables:
-- name: LT_USERNAME
-  value: vaneetb 
-- name: LT_ACCESS_KEY
-  value: PQ2AhuxqqOWAfvzfJlvPaOqusS7YKqfwFJR6DoWY2vsA8CvTzC 
+  LT_USERNAME: vaneetb
+  LT_ACCESS_KEY: PQ2AhuxqqOWAfvzfJlvPaOqusS7YKqfwFJR6DoWY2vsA8CvTzC
+  LT_BUILD_NAME: Azure_testng_demo
 
 stages:
 - stage: BuildAndTest
   jobs:
   - job: BuildAndTestJob
-    displayName: "Run Tests on LambdaTest"
-
     steps:
       - task: configuration@1
-        displayName: "Setup LambdaTest Configuration"
         inputs:
           connection: vaneet-test
+
+      - script: mvn clean install -DskipTests
+        displayName: "Build"
         env:
           LT_USERNAME: $(LT_USERNAME)
           LT_ACCESS_KEY: $(LT_ACCESS_KEY)
+          LT_BUILD_NAME: $(LT_BUILD_NAME)
 
-      - script: |
-          mvn clean install -DskipTests
-        displayName: "Build Project"
-
-      - script: |
-          mvn test -D suite=single.xml
-        displayName: "Run TestNG Tests"
+      - script: mvn test -D suite=single.xml
+        displayName: "Run tests"
         env:
           LT_USERNAME: $(LT_USERNAME)
           LT_ACCESS_KEY: $(LT_ACCESS_KEY)
+          LT_BUILD_NAME: $(LT_BUILD_NAME)
 
       - task: LambdatestResults@1
-        displayName: "Publish LambdaTest Results"
+        displayName: "LambdaTest Results"
         env:
           LT_USERNAME: $(LT_USERNAME)
           LT_ACCESS_KEY: $(LT_ACCESS_KEY)
+          LT_BUILD_NAME: $(LT_BUILD_NAME)
