@@ -2,7 +2,7 @@ trigger:
 - main
 
 pool:
-  azure_local_pool
+  Default
   #vmImage: ubuntu-latest
   #MylocalPool
   
