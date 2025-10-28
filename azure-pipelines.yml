@@ -7,7 +7,7 @@ pool:
   #MylocalPool
   
 variables:
-- group: LambdaTestCredentials
+  LT_BUILD_NAME: 'Azure_testng_demo'
 
 stages:
 - stage: BuildAndTest
