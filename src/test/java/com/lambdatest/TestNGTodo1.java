@@ -21,10 +21,10 @@ public class TestNGTodo1 {
 
     @BeforeMethod
     public void setup(Method m, ITestContext ctx) throws MalformedURLException {
-        String username =System.getenv("LT_USERNAME");
+        String username = System.getenv("LT_USERNAME");
         String authkey = System.getenv("LT_ACCESS_KEY");
         String hub = "@hub.lambdatest.com/wd/hub";
-        String file=System.getenv("LT_BUILD_NAME");
+        String file = System.getenv("LT_BUILD_NAME");
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability("platform", "MacOS Catalina");
         caps.setCapability("browserName", "Safari");
@@ -38,6 +38,8 @@ public class TestNGTodo1 {
         String[] Tags = new String[] { "Feature", "Falcon", "Severe" };
         caps.setCapability("tags", Tags);
         System.out.println(file);
+        System.out.println("Username"+ username);
+        System.out.println("AccessKey"+ authkey);
 
         driver = new RemoteWebDriver(new URL("https://" + username + ":" + authkey + hub), caps);
 
