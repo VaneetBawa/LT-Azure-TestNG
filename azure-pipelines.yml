@@ -7,6 +7,8 @@ pool:
   #MylocalPool
   
 variables:
+  LT_USERNAME: 'vaneetb'     # Replace with your LambdaTest username
+  LT_ACCESS_KEY: 'PQ2AhuxqqOWAfvzfJlvPaOqusS7YKqfwFJR6DoWY2vsA8CvTzC'     # Replace with your LambdaTest access key
   LT_BUILD_NAME: 'Azure_testng_demo'
 
 stages:
@@ -23,7 +25,16 @@ stages:
           mvn clean install -DskipTests
       - script: "mvn test -D suite=single.xml"
         displayName: "Command Line Script"
+        env:
+          LT_USERNAME: $(LT_USERNAME)
+          LT_ACCESS_KEY: $(LT_ACCESS_KEY)
+          LT_BUILD_NAME: $(LT_BUILD_NAME)
       - task: LambdatestResults@1
+        displayName: "LambdaTest Results"
+        env:
+          LT_USERNAME: $(LT_USERNAME)
+          LT_ACCESS_KEY: $(LT_ACCESS_KEY)
+          LT_BUILD_NAME: $(LT_BUILD_NAME)
         
 # - stage: LambdatestResults
 #   jobs:
