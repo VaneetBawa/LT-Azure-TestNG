@@ -7,7 +7,10 @@ pool:
   #MylocalPool
 
 variables:
-  LT_BUILD_NAME: 'Azure_testng_demo'
+- name: LT_USERNAME
+  value: vaneetb 
+- name: LT_ACCESS_KEY
+  value: PQ2AhuxqqOWAfvzfJlvPaOqusS7YKqfwFJR6DoWY2vsA8CvTzC 
 
 stages:
 - stage: BuildAndTest
@@ -34,11 +37,9 @@ stages:
         env:
           LT_USERNAME: $(LT_USERNAME)
           LT_ACCESS_KEY: $(LT_ACCESS_KEY)
-          LT_BUILD_NAME: $(LT_BUILD_NAME)
 
       - task: LambdatestResults@1
         displayName: "Publish LambdaTest Results"
         env:
           LT_USERNAME: $(LT_USERNAME)
           LT_ACCESS_KEY: $(LT_ACCESS_KEY)
-          LT_BUILD_NAME: $(LT_BUILD_NAME)
